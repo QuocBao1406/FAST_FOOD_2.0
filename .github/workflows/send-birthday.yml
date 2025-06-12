@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'  # Bắt buộc!
+          distribution: 'temurin'
 
       - name: Compile Java code
         run: javac -cp src src/birthday/BirthdayMain.java
