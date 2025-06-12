@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: 'temurin'
 
       - name: Compile
         run: javac -cp src src/main/java/autoEmail/MainEmail.java
