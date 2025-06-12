@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Compile Java code
-        run: javac -cp src src/birthday/BirthdayMain.java
+        run: javac -cp src src/main/java/autoEmail/MainEmail.java
 
       - name: Run Java app
         env:
