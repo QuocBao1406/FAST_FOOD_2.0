@@ -2,8 +2,8 @@ name: Send Birthday Emails
 
 on:
   schedule:
-    - cron: '0 17 * * *'  # 0h mỗi ngày giờ Việt Nam
-  workflow_dispatch:
+    - cron: '0 17 * * *'  # Mỗi ngày lúc 0h (giờ Việt Nam = UTC+7)
+  workflow_dispatch:       # Cho phép chạy thủ công để test
 
 jobs:
   build:
@@ -17,11 +17,12 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: 'temurin'  # Quan trọng! Sửa lỗi bạn gặp
 
-      - name: Compile
-        run: javac -cp src src/main/java/autoEmail/MainEmail.java
+      - name: Compile Java code
+        run: javac -cp src src/birthday/BirthdayMain.java
 
-      - name: Run app
+      - name: Run Java app
         env:
           EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
