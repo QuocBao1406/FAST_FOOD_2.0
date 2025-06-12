@@ -2,7 +2,7 @@ name: Send Birthday Emails
 
 on:
   schedule:
-    - cron: '0 17 * * *'  # 0h mỗi ngày giờ Việt Nam
+    - cron: '0 17 * * *'  # 0h mỗi ngày giờ Việt Nam (UTC+7)
   workflow_dispatch:
 
 jobs:
@@ -11,18 +11,18 @@ jobs:
 
     steps:
       - name: Clone repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'
+          distribution: 'temurin'  # Bắt buộc!
 
-      - name: Compile
-        run: javac -cp src src/main/java/autoEmail/MainEmail.java
+      - name: Compile Java code
+        run: javac -cp src src/birthday/BirthdayMain.java
 
-      - name: Run app
+      - name: Run Java app
         env:
           EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
