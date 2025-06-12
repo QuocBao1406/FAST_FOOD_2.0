@@ -27,4 +27,3 @@ jobs:
           EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: java -cp src/main/java autoEmail.MainEmail
-
