@@ -1,0 +1,28 @@
+name: Send Birthday Emails
+
+on:
+  schedule:
+    - cron: '0 17 * * *'  # 0h mỗi ngày giờ Việt Nam
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+
+      - name: Compile
+        run: javac -cp src src/main/java/autoEmail/MainEmail.java
+
+      - name: Run app
+        env:
+          EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: java -cp src birthday.BirthdayMain
