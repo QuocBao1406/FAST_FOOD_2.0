@@ -20,10 +20,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Compile Java code
-        run: javac -cp src src/main/java/autoEmail/MainEmail.java
+        run: javac src/main/java/autoEmail/*.java
 
       - name: Run Java app
         env:
           EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-        run: java -cp src birthday.BirthdayMain
+        run: java -cp src/main/java autoEmail.MainEmail
+
