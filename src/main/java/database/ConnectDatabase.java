@@ -11,7 +11,7 @@ public class ConnectDatabase {
 		Connection connection = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			String url = "jdbc:sqlserver://DESKTOP-K4JVGQP\\QUOCBAO:1433; databaseName = FAST_FOOD; trustServerCertificate = true";
+			String url = "jdbc:sqlserver://localhost:1433; databaseName = FAST_FOOD; trustServerCertificate = true";
 			String username = "sa";
 			String password = "123";
 			
