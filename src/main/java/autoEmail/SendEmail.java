@@ -11,10 +11,10 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 public class SendEmail {
-	public static void sendBirthdayEmail(String toEmail, String name) {
-		final String fromEmail = "baosenpai1213@gmail.com";
-		final String password = "fdwmegrwyvrhlqgi";
-		
+	final static String fromEmail = "baosenpai1213@gmail.com";
+	final static String password = "fdwmegrwyvrhlqgi";
+	
+	public static void sendBirthEmployee(String toEmail, String name) {
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -41,7 +41,44 @@ public class SendEmail {
 					+ "Nguyễn Hữu Quốc Bảo\r\n"
 					+ "BHMN Fast Food");
 			Transport.send(message);
-			System.out.println("Đã gửi email cho " + name);
+			System.out.println("Đã gửi email cho nhan vien: " + name);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void sendBirthCustomer(String toEmail, String name) {
+		Properties pro = new Properties();
+		pro.put("mail.smtp.auth", "true");
+		pro.put("mail.smtp.host", "smtp.gmail.com");
+		pro.put("mail.smtp.port", "587");
+		pro.put("mail.smtp.starttls.enable", "true");
+		
+		Session session = Session.getDefaultInstance(pro, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(fromEmail, password);
+			}
+		});
+		
+		try {
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(fromEmail));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+			message.setSubject("🎉 " + name + ", Chúc Mừng Sinh Nhật Bạn – Quà Ngon Tặng Bạn Ngay Hôm Nay!");
+			message.setText("Kính gửi " + name + ",\r\n"
+					+ "Nhân ngày đặc biệt này, BHMN Fast Food xin gửi đến bạn lời chúc mừng sinh nhật thân thương nhất!\r\n"
+					+ "🎂 Chúc bạn có một ngày sinh nhật thật vui vẻ, ấm áp bên những người thân yêu, và một năm mới tràn đầy sức khỏe, may mắn và thành công.\r\n"
+					+ "Chúng tôi rất trân trọng sự ủng hộ và đồng hành của bạn trong thời gian qua. Là lời tri ân chân thành, cửa hàng xin gửi tặng bạn một món quà nhỏ mừng sinh nhật:\r\n"
+					+ "🎁 Combo Sinh Nhật chỉ 0đ\r\n"
+					+ "📅 Áp dụng trong vòng: trong ngày hôm nay\r\n"
+					+ "📍 Tại: BHMN Fast Food - Chi nhánh: Đại Học Việt Hàn\r\n"
+					+ "Hãy ghé ngay cửa hàng để nhận quà và cùng thưởng thức những món ăn yêu thích nhé!\r\n"
+					+ "Một lần nữa, chúc bạn sinh nhật vui vẻ và thật nhiều niềm vui!\r\n"
+					+ "Thân mến,\r\n"
+					+ "Nguyễn Hữu Quốc Bảo\r\n"
+					+ "BHMN Fast Food - Chi nhánh: Đại học Việt Hàn");
+			Transport.send(message);
+			System.out.println("Đã gửi Email cho khách hàng: " + name);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
