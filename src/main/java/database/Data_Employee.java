@@ -13,11 +13,11 @@ import model.Model_Employee;
 public class Data_Employee {
 	private final Connection con;
 	private static Data_Employee instance;
-	private final String INSERT_NHANVIEN = "INSERT INTO EMPLOYEE (Employee_Name, Employee_Cccd, Employee_Sex, Employee_Birth, Employee_Phone, Employee_Role, Employee_Salary) VALUES (?,?,?,?,?,?,?)";
-	private final String SELECT_NHANVIEN = "SELECT Employee_Id, Employee_Name, Employee_Cccd, Employee_Sex, Employee_Birth, Employee_Phone, Employee_Role, Employee_Salary FROM EMPLOYEE";
-	private final String UPDATE_THONGTIN = "UPDATE EMPLOYEE SET Employee_Name=?, Employee_Cccd=?, Employee_Sex=?, Employee_Birth=?, Employee_Phone=?, Employee_Role=?, Employee_Salary=? WHERE Employee_Id=?";
+	private final String INSERT_NHANVIEN = "INSERT INTO EMPLOYEE (Employee_Name, Employee_Cccd, Employee_Sex, Employee_Birth, Employee_Phone, Employee_Role, Employee_Salary, Employee_Email) VALUES (?,?,?,?,?,?,?,?)";
+	private final String SELECT_NHANVIEN = "SELECT Employee_Id, Employee_Name, Employee_Cccd, Employee_Sex, Employee_Birth, Employee_Phone, Employee_Role, Employee_Salary, Employee_Email FROM EMPLOYEE";
+	private final String UPDATE_THONGTIN = "UPDATE EMPLOYEE SET Employee_Name=?, Employee_Cccd=?, Employee_Sex=?, Employee_Birth=?, Employee_Phone=?, Employee_Role=?, Employee_Salary=?, Employee_Email=? WHERE Employee_Id=?";
 	private final String DELETE_NHANVIEN = "DELETE FROM EMPLOYEE WHERE Employee_Id=?";
-	private final String SELECT_TIMKIEM_NHANVIEN = "SELECT Employee_Id, Employee_Name, Employee_Cccd, Employee_Sex, Employee_Birth, Employee_Phone, Employee_Role, Employee_Salary FROM EMPLOYEE WHERE Employee_Name LIKE ?";
+	private final String SELECT_TIMKIEM_NHANVIEN = "SELECT Employee_Id, Employee_Name, Employee_Cccd, Employee_Sex, Employee_Birth, Employee_Phone, Employee_Role, Employee_Salary, Employee_Email FROM EMPLOYEE WHERE Employee_Name LIKE ?";
 
 	public static Data_Employee getInstance() {
 		if(instance == null) {
@@ -44,8 +44,9 @@ public class Data_Employee {
 				String sdt = r.getString(6);
 				String chucVu = r.getString(7);
 				int luong = r.getInt(8);
+				String email = r.getString(9);
             	
-            	Model_Employee nv = new Model_Employee(maNhanVien, ten, cccd, gioiTinh, ngaySinh, sdt, chucVu, luong);
+            	Model_Employee nv = new Model_Employee(maNhanVien, ten, cccd, gioiTinh, ngaySinh, sdt, chucVu, luong, email);
             	list.add(nv);
             }
             r.close();
@@ -66,6 +67,7 @@ public class Data_Employee {
 	        p.setString(5, employee.getSdt());
 	        p.setString(6, employee.getChucVu());
 	        p.setInt(7, employee.getLuong());
+	        p.setString(8, employee.getEmail());
 	        
 	        // Thực thi câu lệnh INSERT
 	        p.execute();
@@ -93,32 +95,6 @@ public class Data_Employee {
 	    return employee;
 	}
 	
-/*	public Model_NhanVien themNhanVien2(Model_NhanVien nhanVien) {
-        try {
-            PreparedStatement p = con.prepareStatement(INSERT_NHANVIEN, PreparedStatement.RETURN_GENERATED_KEYS);
-            p.setString(1, nhanVien.getTen());
-            p.setString(2, nhanVien.getCccd());
-            p.setString(3, nhanVien.getGioiTinh());
-            p.setDate(4, nhanVien.getNgaySinh());
-            p.setString(5, nhanVien.getSdt());
-            p.setString(6, nhanVien.getChucVu());
-            p.setInt(7, nhanVien.getLuong());
-                        
-            p.execute();
-            ResultSet r = p.getGeneratedKeys();
-            r.first();
-            int maNhanVien = r.getInt(1);
-            nhanVien.setMaNhanVien(maNhanVien);
-          //  DBAccount.getInstance().updateMaNhanVien(maNhanVien);
-            p.close();
-            r.close();
-            
-          } catch (SQLException e) {
-          	e.printStackTrace();
-          }
-        return nhanVien;
-	} */
-	
 	public Model_Employee suaThongTin(Model_Employee employee) {
         try {
             PreparedStatement p = con.prepareStatement(UPDATE_THONGTIN);
@@ -129,7 +105,9 @@ public class Data_Employee {
             p.setString(5, employee.getSdt());
             p.setString(6, employee.getChucVu());
             p.setInt(7, employee.getLuong());
-            p.setInt(8, employee.getMaNhanVien());
+            p.setString(8, employee.getEmail());
+            
+            p.setInt(9, employee.getMaNhanVien());
                         
             p.execute();
             p.close();
@@ -172,8 +150,9 @@ public class Data_Employee {
 				String sdt = r.getString(6);
 				String chucVu = r.getString(7);
 				int luong = r.getInt(8);
+				String email = r.getString(9);
             	
-            	Model_Employee nv = new Model_Employee(maNhanVien, ten, cccd, gioiTinh, ngaySinh, sdt, chucVu, luong);
+            	Model_Employee nv = new Model_Employee(maNhanVien, ten, cccd, gioiTinh, ngaySinh, sdt, chucVu, luong, email);
             	list.add(nv);
             }
             r.close();

@@ -22,14 +22,14 @@ public class ChatPanel extends JPanel {
     public ChatPanel(String user, ChatClient parent) {
         this.chatWith = user;
         this.parent = parent;
-
+        
         setLayout(new BorderLayout());
         chatAreaPanel.setBackground(new Color(254, 254, 233));
-
+        
         chatAreaPanel.setLayout(new BoxLayout(chatAreaPanel, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(chatAreaPanel);
         add(scrollPane, BorderLayout.CENTER);
-
+        
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton emojiButton = new JButton("");
         emojiButton.setBackground(new Color(254, 250, 233));
@@ -90,18 +90,18 @@ public class ChatPanel extends JPanel {
                     File selectedFile = chooser.getSelectedFile();
                     try {
                         BufferedImage image = ImageIO.read(selectedFile);
-
+                        
                         String message = JOptionPane.showInputDialog(null, "Nhập tin cần giấu:");
                         if (message == null || message.isEmpty()) return;
-
+                        
                         String password = JOptionPane.showInputDialog(null, "Nhập mật khẩu:");
                         if (password == null || password.isEmpty()) return;
-
+                        
                         BufferedImage encoded = SteganographyUtil.hideTextWithPassword(image, message, password);
-
+                        
                         File outFile = new File("encoded_" + selectedFile.getName());
                         ImageIO.write(encoded, "png", outFile);
-
+                        
                         // Gửi ảnh đã giấu tin đi
                         parent.sendFileOrImage(chatWith, outFile, true);
                         appendSystemMessage("Đã gửi ảnh đã giấu tin: " + outFile.getName());
@@ -352,8 +352,7 @@ public class ChatPanel extends JPanel {
                     
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(ChatPanel.this, 
-                        "Không thể phát tin nhắn thoại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(ChatPanel.this, "Không thể phát tin nhắn thoại", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
             });
             
@@ -361,7 +360,7 @@ public class ChatPanel extends JPanel {
             voicePanel.add(durationLabel);
             voicePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
             chatAreaPanel.add(voicePanel);
-        } 
+        }
         else if (isImage && isImageFile(file.getName())) {
             JLabel label = new JLabel(sender + " đã gửi ảnh:");
             label.setAlignmentX(Component.LEFT_ALIGNMENT);

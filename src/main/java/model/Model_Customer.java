@@ -1,5 +1,10 @@
 package model;
 
+import java.sql.Date;
+
+/**
+ * 
+ */
 public class Model_Customer {
 	private String  Customer_Id;
 	private String  Customer_Name;
@@ -7,14 +12,27 @@ public class Model_Customer {
 	private String Customer_Address;
 	private String Customer_Rank;
 	private double Customer_Total;
+	private String Customer_Email;
+	private Date Customer_Birth;
+	
+	public Model_Customer(String customer_Id, String customer_Name, String customer_Sex, String customer_Address, double customer_Total, String customer_Rank, Date Customer_Birth, String Customer_Email) {
+		this.Customer_Id = customer_Id;
+		this.Customer_Name = customer_Name;
+		this.Customer_Sex = customer_Sex;
+		this.Customer_Address = customer_Address;
+		this.Customer_Total = customer_Total;
+		this.Customer_Rank = customer_Rank;
+		this.Customer_Email = Customer_Email;
+		this.Customer_Birth = Customer_Birth;
+	}
 	
 	public Model_Customer(String customer_Id, String customer_Name, String customer_Sex, String customer_Address, double customer_Total, String customer_Rank) {
-		Customer_Id = customer_Id;
-		Customer_Name = customer_Name;
-		Customer_Sex = customer_Sex;
-		Customer_Address = customer_Address;
-		Customer_Total = customer_Total;
-		Customer_Rank = customer_Rank;
+		this.Customer_Id = customer_Id;
+		this.Customer_Name = customer_Name;
+		this.Customer_Sex = customer_Sex;
+		this.Customer_Address = customer_Address;
+		this.Customer_Total = customer_Total;
+		this.Customer_Rank = customer_Rank;
 	}
 	
 	public Model_Customer(String customer_Id, String customer_Name, String customer_Sex, String customer_Address) {
@@ -26,11 +44,11 @@ public class Model_Customer {
 	
 	
 	public Model_Customer(String customer_Name, String customer_Sex, String customer_Address, double customer_Total, String customer_Rank) {
-		Customer_Name = customer_Name;
-		Customer_Sex = customer_Sex;
-		Customer_Address = customer_Address;
-		Customer_Total = customer_Total;		
-		Customer_Rank = customer_Rank;
+		this.Customer_Name = customer_Name;
+		this.Customer_Sex = customer_Sex;
+		this.Customer_Address = customer_Address;
+		this.Customer_Total = customer_Total;		
+		this.Customer_Rank = customer_Rank;
 	}
 
 	public String getCustomer_Id() {
@@ -84,4 +102,22 @@ public class Model_Customer {
 	public double addTotal(double customer_Total) {
 		return Customer_Total += customer_Total;
 	}
+
+	public String getCustomer_Email() {
+		return Customer_Email;
+	}
+
+	public void setCustomer_Email(String customer_Email) {
+		Customer_Email = customer_Email;
+	}
+
+	public Date getCustomer_Birth() {
+		return Customer_Birth;
+	}
+
+	public void setCustomer_Birth(Date customer_Birth) {
+		Customer_Birth = customer_Birth;
+	}
+	
+	
 }

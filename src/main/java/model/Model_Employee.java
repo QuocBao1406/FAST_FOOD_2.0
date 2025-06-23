@@ -16,9 +16,10 @@ public class Model_Employee {
 	private String sdt;
 	private String chucVu;
 	private int luong;
+	private String email;
 
 	public Model_Employee(int maNhanVien, String ten, String cccd, String gioiTinh, Date ngaySinh, String sdt,
-			String chucVu, int luong) {
+			String chucVu, int luong, String email) {
 		super();
 		this.maNhanVien = maNhanVien;
 		this.ten = ten;
@@ -28,6 +29,7 @@ public class Model_Employee {
 		this.sdt = sdt;
 		this.chucVu = chucVu;
 		this.luong = luong;
+		this.email = email;
 	}
 
 	  public JSONObject toJsonObject(String type) {
@@ -42,6 +44,7 @@ public class Model_Employee {
 				json.put("sdt", sdt);
 				json.put("chucVu", chucVu);
 				json.put("luong", luong);
+				json.put("email", email);
 				return json;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -60,6 +63,7 @@ public class Model_Employee {
 	        	chucVu = obj.getString("chucVu");
 	        	luong = obj.getInt("luong");
 	        	ngaySinh = convertToSqlDate(obj.getString("ngaySinh"));
+	        	email = obj.getString("email");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -144,4 +148,14 @@ public class Model_Employee {
 	public void setLuong(int luong) {
 		this.luong = luong;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 }

@@ -49,6 +49,7 @@ public class Employee_Management extends JPanel{
 	private JComboBox cb_chucVu;
 	private PlaceholderTextField tf_timKiem;
 	private JButton bt_luu;
+	private JTextField tf_email;
 
 	public Employee_Management() {
 		setBackground(new Color(255, 242, 189));
@@ -63,21 +64,21 @@ public class Employee_Management extends JPanel{
 		table_model = new DefaultTableModel(
 				new Object[][] {},
 				new String[] {
-					"M\u00E3 NV", "T\u00EAn NV", "CCCD", "Gi\u1EDBi", "Ng\u00E0y sinh", "S\u0110T", "Ch\u1EE9c v\u1EE5", "L\u01B0\u01A1ng"
+					"M\u00E3 NV", "T\u00EAn NV", "CCCD", "Gi\u1EDBi", "Ng\u00E0y sinh", "S\u0110T", "Ch\u1EE9c v\u1EE5", "L\u01B0\u01A1ng", "Email"
 				});
 		loadNhanVien();
 		table = new JTable();
 		table.setModel(table_model);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		table.getColumnModel().getColumn(0).setPreferredWidth(50);
 		table.getColumnModel().getColumn(1).setPreferredWidth(230);
-		table.getColumnModel().getColumn(2).setPreferredWidth(150);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
 		table.getColumnModel().getColumn(3).setPreferredWidth(70);
 		table.getColumnModel().getColumn(4).setPreferredWidth(133);
 		table.getColumnModel().getColumn(5).setPreferredWidth(125);
-		table.getColumnModel().getColumn(6).setPreferredWidth(170);
-		table.getColumnModel().getColumn(7).setPreferredWidth(171);
-		
+		table.getColumnModel().getColumn(6).setPreferredWidth(120);
+		table.getColumnModel().getColumn(7).setPreferredWidth(121);
+		table.getColumnModel().getColumn(8).setPreferredWidth(200);	
 		Font headerFont = new Font("Arial", Font.BOLD, 18);
 		table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 30));
 		table.getTableHeader().setFont(headerFont);
@@ -90,90 +91,90 @@ public class Employee_Management extends JPanel{
 		
 		JLabel lblNewLabel = new JLabel("Mã nhân viên");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNewLabel.setBounds(20, 115, 203, 30);
+		lblNewLabel.setBounds(20, 105, 203, 30);
 		add(lblNewLabel);
 		
 		JLabel lblTnNhnVin = new JLabel("Tên nhân viên");
 		lblTnNhnVin.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblTnNhnVin.setBounds(20, 185, 214, 38);
+		lblTnNhnVin.setBounds(20, 175, 214, 38);
 		add(lblTnNhnVin);
 		
 		JLabel lblCccd = new JLabel("CCCD");
 		lblCccd.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblCccd.setBounds(20, 258, 160, 30);
+		lblCccd.setBounds(20, 248, 160, 30);
 		add(lblCccd);
 		
 		JLabel lblGiiTnh = new JLabel("Giới Tính");
 		lblGiiTnh.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblGiiTnh.setBounds(20, 329, 167, 30);
+		lblGiiTnh.setBounds(20, 319, 167, 30);
 		add(lblGiiTnh);
 		
 		tf_maNhanVien = new JTextField();
 		tf_maNhanVien.setFont(new Font("Tahoma", Font.BOLD, 20));
-		tf_maNhanVien.setBounds(236, 110, 275, 40);
+		tf_maNhanVien.setBounds(236, 100, 275, 40);
 		add(tf_maNhanVien);
 		tf_maNhanVien.setColumns(10);
 		
 		tf_tenNhanVien = new JTextField();
 		tf_tenNhanVien.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tf_tenNhanVien.setColumns(10);
-		tf_tenNhanVien.setBounds(236, 183, 275, 40);
+		tf_tenNhanVien.setBounds(236, 173, 275, 40);
 		add(tf_tenNhanVien);
 		
 		tf_cccd = new JTextField();
 		tf_cccd.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tf_cccd.setColumns(10);
-		tf_cccd.setBounds(236, 256, 275, 40);
+		tf_cccd.setBounds(236, 246, 275, 40);
 		add(tf_cccd);
 		
 		String[] itemGioiTinh = { "Nam", "Nữ" };
 		cb_gioiTinh = new JComboBox<>(itemGioiTinh);
 		cb_gioiTinh.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		cb_gioiTinh.setBounds(236, 326, 275, 40);
+		cb_gioiTinh.setBounds(236, 316, 275, 40);
 		add(cb_gioiTinh);
 		
 		JLabel lblNgySinh = new JLabel("Ngày sinh");
 		lblNgySinh.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblNgySinh.setBounds(535, 115, 154, 35);
+		lblNgySinh.setBounds(535, 105, 154, 35);
 		add(lblNgySinh);
 		
 		JLabel lblSt = new JLabel("SĐT");
 		lblSt.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblSt.setBounds(535, 189, 125, 30);
+		lblSt.setBounds(535, 179, 125, 30);
 		add(lblSt);
 		
 		JLabel lblChcV = new JLabel("Chức vụ");
 		lblChcV.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblChcV.setBounds(535, 255, 154, 36);
+		lblChcV.setBounds(535, 245, 154, 36);
 		add(lblChcV);
 		
 		JLabel lblLng = new JLabel("Lương");
 		lblLng.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblLng.setBounds(535, 327, 125, 35);
+		lblLng.setBounds(535, 317, 125, 35);
 		add(lblLng);
 		
 		tf_ngaySinh = new JTextField();
 		tf_ngaySinh.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tf_ngaySinh.setColumns(10);
-		tf_ngaySinh.setBounds(690, 110, 268, 40);
+		tf_ngaySinh.setBounds(690, 100, 268, 40);
 		add(tf_ngaySinh);
 		
 		tf_sdt = new JTextField();
 		tf_sdt.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tf_sdt.setColumns(10);
-		tf_sdt.setBounds(690, 183, 268, 40);
+		tf_sdt.setBounds(690, 173, 268, 40);
 		add(tf_sdt);
 		
 		tf_luong = new JTextField();
 		tf_luong.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tf_luong.setColumns(10);
-		tf_luong.setBounds(690, 326, 268, 40);
+		tf_luong.setBounds(690, 309, 268, 40);
 		add(tf_luong);
 		
 		String[] itemChucVu = { "Quản lý", "Nhân viên", "Lao công", "Bảo vệ" };
 		cb_chucVu = new JComboBox<>(itemChucVu);
 		cb_chucVu.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		cb_chucVu.setBounds(690, 256, 268, 40);
+		cb_chucVu.setBounds(690, 246, 268, 40);
 		add(cb_chucVu);
 		
 		JLabel bt_themNhanVien = new JLabel("THÊM NHÂN VIÊN");
@@ -210,7 +211,7 @@ public class Employee_Management extends JPanel{
         	}
         });
         bt_luu.setFont(new Font("Tahoma", Font.BOLD, 20));
-        bt_luu.setBounds(539, 396, 105, 37);
+        bt_luu.setBounds(990, 392, 105, 37);
         bt_luu.setVisible(false);
         add(bt_luu);
 		
@@ -288,6 +289,19 @@ public class Employee_Management extends JPanel{
         });
         bt_load.setBounds(414, 396, 105, 37);
         add(bt_load);
+        
+        JLabel lblEmail = new JLabel("Email");
+        lblEmail.setFont(new Font("Tahoma", Font.BOLD, 30));
+        lblEmail.setBounds(535, 380, 125, 35);
+        add(lblEmail);
+        
+        tf_email = new JTextField();
+        tf_email.setText("");
+        tf_email.setFont(new Font("Tahoma", Font.BOLD, 20));
+        tf_email.setEditable(false);
+        tf_email.setColumns(10);
+        tf_email.setBounds(690, 376, 268, 40);
+        add(tf_email);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -302,6 +316,7 @@ public class Employee_Management extends JPanel{
                         tf_sdt.setText(table.getValueAt(selectedRow, 5).toString());
                         cb_chucVu.setSelectedItem(table.getValueAt(selectedRow, 6).toString());
                         tf_luong.setText(table.getValueAt(selectedRow, 7).toString());
+                        tf_email.setText(table.getValueAt(selectedRow, 8).toString());
                     }
                 }
             }
@@ -313,14 +328,14 @@ public class Employee_Management extends JPanel{
 		ArrayList<Model_Employee> list = Data_Employee.getInstance().loadNhanVien();
 		table_model.setRowCount(0);
 		for(Model_Employee nhanVienMoi : list) {
-	        Object[] newRow = {nhanVienMoi.getMaNhanVien(), nhanVienMoi.getTen(), nhanVienMoi.getCccd(), nhanVienMoi.getGioiTinh(), nhanVienMoi.getNgaySinh(), nhanVienMoi.getSdt(), nhanVienMoi.getChucVu(), nhanVienMoi.getLuong()};
+	        Object[] newRow = {nhanVienMoi.getMaNhanVien(), nhanVienMoi.getTen(), nhanVienMoi.getCccd(), nhanVienMoi.getGioiTinh(), nhanVienMoi.getNgaySinh(), nhanVienMoi.getSdt(), nhanVienMoi.getChucVu(), nhanVienMoi.getLuong(), nhanVienMoi.getEmail()};
 	        table_model.addRow(newRow);
 		}
 	}
 	
 	public void themNhanVien(Model_Employee nhanVien) {
 		Model_Employee nhanVienMoi = Data_Employee.getInstance().themNhanVien(nhanVien);
-        Object[] newRow = {nhanVienMoi.getMaNhanVien(), nhanVienMoi.getTen(), nhanVienMoi.getCccd(), nhanVienMoi.getGioiTinh(), nhanVienMoi.getNgaySinh(), nhanVienMoi.getSdt(), nhanVienMoi.getChucVu(), nhanVienMoi.getLuong()};
+        Object[] newRow = {nhanVienMoi.getMaNhanVien(), nhanVienMoi.getTen(), nhanVienMoi.getCccd(), nhanVienMoi.getGioiTinh(), nhanVienMoi.getNgaySinh(), nhanVienMoi.getSdt(), nhanVienMoi.getChucVu(), nhanVienMoi.getLuong(), nhanVienMoi.getEmail()};
         table_model.addRow(newRow);
 	}
 	
@@ -342,8 +357,9 @@ public class Employee_Management extends JPanel{
 		String sdt = tf_sdt.getText();
 		String chucVu = cb_chucVu.getSelectedItem().toString();
 		int luong = Integer.parseInt(tf_luong.getText());
+		String email = tf_email.getText();
 		
-		Model_Employee nhanVien = new Model_Employee(maNhanVien, ten, cccd, gioiTinh, dateSql, sdt, chucVu, luong);
+		Model_Employee nhanVien = new Model_Employee(maNhanVien, ten, cccd, gioiTinh, dateSql, sdt, chucVu, luong, email);
 		Data_Employee.getInstance().suaThongTin(nhanVien);
 	}
 	
@@ -360,7 +376,7 @@ public class Employee_Management extends JPanel{
 			ArrayList<Model_Employee> list = Data_Employee.getInstance().timkiem("%" + name + "%");
 			table_model.setRowCount(0);
 			for(Model_Employee nhanVienMoi : list) {
-		        Object[] newRow = {nhanVienMoi.getMaNhanVien(), nhanVienMoi.getTen(), nhanVienMoi.getCccd(), nhanVienMoi.getGioiTinh(), nhanVienMoi.getNgaySinh(), nhanVienMoi.getSdt(), nhanVienMoi.getChucVu(), nhanVienMoi.getLuong()};
+		        Object[] newRow = {nhanVienMoi.getMaNhanVien(), nhanVienMoi.getTen(), nhanVienMoi.getCccd(), nhanVienMoi.getGioiTinh(), nhanVienMoi.getNgaySinh(), nhanVienMoi.getSdt(), nhanVienMoi.getChucVu(), nhanVienMoi.getLuong(), nhanVienMoi.getEmail()};
 		        table_model.addRow(newRow);
 			}
 		}	
@@ -377,6 +393,7 @@ public class Employee_Management extends JPanel{
 		tf_luong.setText("");
 		cb_gioiTinh.setSelectedIndex(0);
 		cb_chucVu.setSelectedIndex(0);
+		tf_email.setText("");
 		
 		tf_maNhanVien.setEditable(false);
 		tf_tenNhanVien.setEditable(false);
@@ -386,6 +403,7 @@ public class Employee_Management extends JPanel{
 		tf_luong.setEditable(false);
 		cb_gioiTinh.setEnabled(false);
 		cb_chucVu.setEnabled(false);
+		tf_email.setEditable(false);
 	}
 	
 	public void unreset() {		
@@ -396,5 +414,6 @@ public class Employee_Management extends JPanel{
 		tf_luong.setEditable(true);
 		cb_gioiTinh.setEnabled(true);
 		cb_chucVu.setEnabled(true);
+		tf_email.setEditable(true);
 	}
 }

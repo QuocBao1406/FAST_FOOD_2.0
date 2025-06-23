@@ -30,6 +30,7 @@ public class ThemNhanVien extends JPanel {
 	private JTextField tf_ngaySinh;
 	private JDialog dialog;
 	private JDateChooser date_ngaySinh;
+	private JTextField tf_email;
 
 	public ThemNhanVien(JDialog dialog) {
 		this.dialog = dialog;
@@ -50,24 +51,24 @@ public class ThemNhanVien extends JPanel {
 
 		JLabel lblCccd = new JLabel("CCCD");
 		lblCccd.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblCccd.setBounds(53, 171, 154, 30);
+		lblCccd.setBounds(53, 143, 154, 30);
 		add(lblCccd);
 
 		tf_cccd = new JTextField();
 		tf_cccd.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tf_cccd.setColumns(10);
-		tf_cccd.setBounds(217, 171, 268, 29);
+		tf_cccd.setBounds(217, 143, 268, 29);
 		add(tf_cccd);
 
 		JLabel lblGiiTnh = new JLabel("Giới Tính");
 		lblGiiTnh.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblGiiTnh.setBounds(53, 258, 154, 30);
+		lblGiiTnh.setBounds(53, 198, 154, 30);
 		add(lblGiiTnh);
 
 		String[] itemGioiTinh = { "Nam", "Nữ" };
 		JComboBox<String> cb_gioiTinh = new JComboBox<String>(itemGioiTinh);
 		cb_gioiTinh.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		cb_gioiTinh.setBounds(217, 258, 268, 30);
+		cb_gioiTinh.setBounds(217, 198, 268, 30);
 		add(cb_gioiTinh);
 
 		JLabel lblLng = new JLabel("Lương");
@@ -136,8 +137,9 @@ public class ThemNhanVien extends JPanel {
 				String sdt = tf_sdt.getText();
 				String chucVu = cb_chucVu.getSelectedItem().toString();
 				int luong = Integer.parseInt(tf_luong.getText());
+				String email = tf_email.getText();
 
-				Model_Employee nhanVien = new Model_Employee(0, ten, cccd, gioiTinh, sqlDate, sdt, chucVu, luong);
+				Model_Employee nhanVien = new Model_Employee(0, ten, cccd, gioiTinh, sqlDate, sdt, chucVu, luong, email);
 
 				Data_Employee nv = new Data_Employee();
 				nv.themNhanVien(nhanVien);
@@ -167,5 +169,16 @@ public class ThemNhanVien extends JPanel {
 		lblNewLabel_3.setIcon(new ImageIcon(ThemNhanVien.class.getResource("/images/fast_food.png")));
 		lblNewLabel_3.setBounds(268, 19, 49, 42);
 		add(lblNewLabel_3);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblEmail.setBounds(53, 258, 154, 30);
+		add(lblEmail);
+		
+		tf_email = new JTextField();
+		tf_email.setFont(new Font("Tahoma", Font.BOLD, 20));
+		tf_email.setColumns(10);
+		tf_email.setBounds(217, 258, 268, 29);
+		add(tf_email);
 	}
 }

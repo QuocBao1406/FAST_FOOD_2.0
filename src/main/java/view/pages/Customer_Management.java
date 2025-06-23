@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -35,6 +36,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 
@@ -53,6 +55,8 @@ public class Customer_Management extends JPanel{
 	private JComboBox tf_locrank;
 	private JButton sua;
 	private JButton bt_save;
+	private JTextField tf_birthday;
+	private JTextField tf_email;
 	
 	public static void loadData() {
 		ArrayList<Model_Customer> list = Data_Customer.getInstance().loadCustomer();
@@ -60,7 +64,7 @@ public class Customer_Management extends JPanel{
 		model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column >= 8;  
+                return column >=8;  
             }
         };
         
@@ -70,6 +74,8 @@ public class Customer_Management extends JPanel{
         model.addColumn("Địa Chỉ");
         model.addColumn("Tổng chi");
         model.addColumn("Hạng");
+        model.addColumn("Ngày sinh");
+        model.addColumn("Email");
         
         for(Model_Customer ctm : list) {
         	model.addRow(new Object[] {
@@ -78,7 +84,9 @@ public class Customer_Management extends JPanel{
         			ctm.getCustomer_Sex(),
         			ctm.getCustomer_Address(),
         			ctm.getCustomer_Total(),
-        			ctm.getCustomer_Rank()
+        			ctm.getCustomer_Rank(),
+        			ctm.getCustomer_Birth(),
+        			ctm.getCustomer_Email()
         	});
         }
 
@@ -91,11 +99,14 @@ public class Customer_Management extends JPanel{
         TableColumnModel columnModel = table.getColumnModel();
         
         columnModel.getColumn(0).setPreferredWidth(100); 
-        columnModel.getColumn(1).setPreferredWidth(300); 
+        columnModel.getColumn(1).setPreferredWidth(200); 
         columnModel.getColumn(2).setPreferredWidth(100); 
-        columnModel.getColumn(3).setPreferredWidth(300);  
-        columnModel.getColumn(4).setPreferredWidth(250); 
+        columnModel.getColumn(3).setPreferredWidth(100);  
+        columnModel.getColumn(4).setPreferredWidth(150); 
         columnModel.getColumn(5).setPreferredWidth(150); 
+        columnModel.getColumn(6).setPreferredWidth(200);
+        columnModel.getColumn(7).setPreferredWidth(200);
+        
         
         table.setRowHeight(30);
 	}
@@ -187,7 +198,7 @@ public class Customer_Management extends JPanel{
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color(251, 249, 238));
-		panel.setBounds(583, 95, 417, 279);
+		panel.setBounds(580, 95, 417, 279);
 		add(panel);
 		
 		tf_loctotal1 = new JTextField();
@@ -250,6 +261,8 @@ public class Customer_Management extends JPanel{
 		        tf_adr.setText("");
 		        tf_total.setText(String.valueOf(""));
 		        tf_rank.setSelectedItem("");
+		        tf_birthday.setText("");
+		        tf_email.setText("");
 		        loadData();
 			}
 		});
@@ -269,6 +282,8 @@ public class Customer_Management extends JPanel{
 				tf_total.setEditable(false);
 				tf_rank.setEnabled(false);
 				bt_save.setVisible(false);
+				tf_birthday.setEditable(false);
+				tf_email.setEditable(false);
 			}
 		});
 		bt_save.setForeground(Color.WHITE);
@@ -299,7 +314,7 @@ public class Customer_Management extends JPanel{
 		xoa.setFont(new Font("Tahoma", Font.BOLD, 17));
 		xoa.setBorder(null);
 		xoa.setBackground(new Color(254, 135, 135));
-		xoa.setBounds(1020, 299, 200, 66);
+		xoa.setBounds(1020, 331, 200, 66);
 		add(xoa);
 		
 		JButton them = new JButton("Thêm Khách Hàng");
@@ -318,7 +333,7 @@ public class Customer_Management extends JPanel{
 		them.setFont(new Font("Tahoma", Font.BOLD, 17));
 		them.setBorder(null);
 		them.setBackground(new Color(139, 184, 250));
-		them.setBounds(1020, 147, 200, 66);
+		them.setBounds(1020, 179, 200, 66);
 		add(them);
 		
 		JButton xuat = new JButton("Xuất Danh Sách");
@@ -332,13 +347,13 @@ public class Customer_Management extends JPanel{
 		xuat.setFont(new Font("Tahoma", Font.BOLD, 17));
 		xuat.setBorder(null);
 		xuat.setBackground(new Color(133, 247, 100));
-		xuat.setBounds(1020, 63, 200, 74);
+		xuat.setBounds(1020, 95, 200, 74);
 		add(xuat);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(20, 384, 1200, 399);
+		scrollPane.setBounds(20, 432, 1200, 351);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -352,6 +367,8 @@ public class Customer_Management extends JPanel{
 		        tf_adr.setText(table.getValueAt(rowIndex, 3).toString());
 		        tf_total.setText(table.getValueAt(rowIndex, 4).toString());
 		        tf_rank.setSelectedItem(table.getValueAt(rowIndex, 5).toString());
+		        tf_birthday.setText(table.getValueAt(rowIndex, 6).toString());
+		        tf_email.setText(table.getValueAt(rowIndex, 7).toString());
 		        
 		        tf_id.setEditable(false);
 				tf_name.setEditable(false);
@@ -359,6 +376,8 @@ public class Customer_Management extends JPanel{
 				tf_adr.setEditable(false);
 				tf_total.setEditable(false);
 				tf_rank.setEditable(false);
+				tf_birthday.setEditable(false);
+				tf_email.setEditable(false);
 		    }
 		});
 		
@@ -367,16 +386,42 @@ public class Customer_Management extends JPanel{
 		tf_name.setEditable(false);
 		tf_adr.setEditable(false);
 		tf_total.setEditable(false);
-		tf_rank.setEditable(true);
+		tf_rank.setEditable(false);
 		
 		sua = new JButton("Sửa Thông Tin");
 		sua.setForeground(new Color(0, 0, 0));
-		sua.setBounds(1020, 223, 200, 66);
+		sua.setBounds(1020, 255, 200, 66);
 		sua.setVisible(true);
 		add(sua);
 		sua.setFont(new Font("Tahoma", Font.BOLD, 17));
 		sua.setBorder(null);
 		sua.setBackground(new Color(254, 224, 135));
+		
+		JLabel lblEmail = new JLabel("Ngày sinh");
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblEmail.setBounds(27, 384, 192, 36);
+		add(lblEmail);
+		
+		tf_birthday = new JTextField();
+		tf_birthday.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		tf_birthday.setEditable(false);
+		tf_birthday.setColumns(10);
+		tf_birthday.setAutoscrolls(false);
+		tf_birthday.setBounds(218, 384, 330, 36);
+		add(tf_birthday);
+		
+		JLabel lblEmail_1 = new JLabel("Email");
+		lblEmail_1.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblEmail_1.setBounds(580, 386, 77, 36);
+		add(lblEmail_1);
+		
+		tf_email = new JTextField();
+		tf_email.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		tf_email.setEditable(false);
+		tf_email.setColumns(10);
+		tf_email.setAutoscrolls(false);
+		tf_email.setBounds(667, 386, 330, 36);
+		add(tf_email);
 		sua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				tf_id.setEditable(true);
@@ -391,6 +436,8 @@ public class Customer_Management extends JPanel{
 				tf_adr.setEditable(true);
 				tf_total.setEditable(true);
 				bt_save.setVisible(true);
+				tf_birthday.setEditable(true);
+				tf_email.setEditable(true);
 			}
 		});
 		
@@ -725,6 +772,15 @@ public class Customer_Management extends JPanel{
 			String customer_sex = tf_sex.getSelectedItem().toString();
 			String customer_address = tf_adr.getText().toString();
 			double customer_total = Double.parseDouble(tf_total.getText());
+			java.sql.Date dateSql = null;	
+			try {
+	            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	            Date dateUtil = sdf.parse(tf_birthday.getText());
+	            dateSql = new java.sql.Date(dateUtil.getTime());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			String customer_email = tf_email.getText();
 
 			if(customer_total >= 3000000) {
 				tf_rank.setSelectedItem("Kim cương");
@@ -740,7 +796,7 @@ public class Customer_Management extends JPanel{
 			
 			String customer_rank = tf_rank.getSelectedItem().toString();
 			
-			Model_Customer model_customer = new Model_Customer(customer_id, customer_name, customer_sex, customer_address, customer_total, customer_rank);
+			Model_Customer model_customer = new Model_Customer(customer_id, customer_name, customer_sex, customer_address, customer_total, customer_rank, dateSql, customer_email);
 			Data_Customer.getInstance().updateCustomer(model_customer);
 			
 			model.setValueAt(customer_id, selectRow, 0);  
@@ -749,6 +805,8 @@ public class Customer_Management extends JPanel{
 			model.setValueAt(customer_address, selectRow, 3); 
 			model.setValueAt(customer_total, selectRow, 4); 
 			model.setValueAt(customer_rank, selectRow, 5);
+			model.setValueAt(dateSql, selectRow, 6);
+			model.setValueAt(customer_email, selectRow, 7);
 			
 			loadData();
 		}

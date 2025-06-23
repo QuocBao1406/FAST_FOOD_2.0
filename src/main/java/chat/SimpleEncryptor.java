@@ -6,6 +6,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class SimpleEncryptor {
+	//băm dùng MD5 và Base64
 	public static SecretKeySpec createKey(String password) throws Exception {
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		byte[] keyBytes = md.digest(password.getBytes("UTF-8"));

@@ -34,6 +34,8 @@ import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import chat.ChatAI;
+
 public class Store_Management extends JPanel{
 	private JLabel lb_active_1;
 	private JLabel lb_name_1;
@@ -242,8 +244,20 @@ public class Store_Management extends JPanel{
 			}
 		});
 		lblNewLabel_4.setIcon(new ImageIcon(Store_Management.class.getResource("/images/messenger.png")));
-		lblNewLabel_4.setBounds(10, 620, 100, 90);
+		lblNewLabel_4.setBounds(10, 620, 90, 90);
 		add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_4_1 = new JLabel("");
+		lblNewLabel_4_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ChatAI chatAI = new ChatAI();
+				chatAI.setVisible(true);
+			}
+		});
+		lblNewLabel_4_1.setIcon(new ImageIcon(Store_Management.class.getResource("/images/chatgpt_big.png")));
+		lblNewLabel_4_1.setBounds(120, 618, 95, 95);
+		add(lblNewLabel_4_1);
 		
 		active();
 	}

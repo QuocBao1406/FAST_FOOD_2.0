@@ -45,7 +45,7 @@ public class ChatClient extends JFrame {
     }
 
     private void loginDialog() {
-        username = JOptionPane.showInputDialog(this, "Nhập tên người dùng:");
+        username = JOptionPane.showInputDialog(this, "Nhập Tên Nhân Viên:");
         if (username == null || username.trim().isEmpty()) {
             System.exit(0);
         }

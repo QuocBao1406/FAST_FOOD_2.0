@@ -51,8 +51,11 @@ public class ChatServer {
 
         public void sendMessage(String msg) {
             try {
+            	//ghi tin nhan
                 writer.write(msg);
+                //ket thuc dong
                 writer.newLine();
+                //gui tin nhan
                 writer.flush();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -67,6 +70,7 @@ public class ChatServer {
 
                 String msg;
                 while ((msg = reader.readLine()) != null) {
+                	//enc tin duoc chuyen den - cai la /enc
                     if (msg.startsWith("/enc:")) {
                         // Tin nhắn mã hóa
                         String[] parts = msg.split(":", 4);
@@ -79,7 +83,6 @@ public class ChatServer {
                         broadcastToRelevantUsers("/enc:" + sender + ":" + receiver + ":" + encrypted, sender, receiver);
 
                     } else if (msg.startsWith("/img:") || msg.startsWith("/file:")) {
-                        // Gửi ảnh hoặc file (chỉ đường dẫn)
                         String[] parts = msg.split(":", 4);
                         if (parts.length < 4) continue;
 
@@ -91,14 +94,14 @@ public class ChatServer {
                         broadcastToRelevantUsers(prefix + ":" + sender + ":" + receiver + ":" + filePath, sender, receiver);
 
                     } else {
-                        // Tin nhắn văn bản thường
+                        // Tin nhắn văn bản thường - khong co /kieu gui:
                         String[] parts = msg.split(":", 3);
                         if (parts.length < 3) continue;
 
                         String sender = parts[0];
                         String receiver = parts[1];
                         String message = parts[2];
-
+                        
                         broadcastToRelevantUsers("MSG:" + sender + ":" + receiver + ":" + message, sender, receiver);
                     }
                 }

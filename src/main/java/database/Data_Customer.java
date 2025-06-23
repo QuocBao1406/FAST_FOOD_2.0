@@ -25,7 +25,7 @@ public class Data_Customer {
 	
 	public ArrayList<Model_Customer> loadCustomer() {
 		ArrayList<Model_Customer> list = new ArrayList<>();
-		String sql = "SELECT * FROM CUSTOMER;";
+		String sql = "SELECT * FROM CUSTOMER";
 		try(Connection connec = ConnectDatabase.getInstance().getConnection();
 			PreparedStatement ps = connec.prepareStatement(sql)){
 			ResultSet rs = ps.executeQuery();
@@ -36,7 +36,9 @@ public class Data_Customer {
 						rs.getString(3),
 						rs.getString(4),
 						rs.getDouble(5),
-						rs.getString(6)
+						rs.getString(6),
+						rs.getDate(9),
+						rs.getString(7)
 						);
 				list.add(ctm);
 			}
@@ -70,14 +72,16 @@ public class Data_Customer {
 
 	public int addCustomer(Model_Customer customer) {
 		int res = 0;
-		String sql = "INSERT INTO CUSTOMER (Customer_Id,Customer_Name,Customer_Sex,Customer_Address, Customer_Rank)"
-				+ "VALUES (?,?,?,?,'')";
+		String sql = "INSERT INTO CUSTOMER (Customer_Id,Customer_Name,Customer_Sex,Customer_Address, Customer_Rank, Customer_Birth, Customer_Email)"
+				+ "VALUES (?,?,?,?,'',?,?)";
 		try(Connection connec = ConnectDatabase.getInstance().getConnection();
 			PreparedStatement ps = connec.prepareStatement(sql)){
 			ps.setString(1,customer.getCustomer_Id());
 			ps.setString(2, customer.getCustomer_Name());
 			ps.setString(3, customer.getCustomer_Sex());
 			ps.setString(4, customer.getCustomer_Address());
+			ps.setDate(5, customer.getCustomer_Birth());
+			ps.setString(6, customer.getCustomer_Email());
 			res = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -165,7 +169,9 @@ public class Data_Customer {
 							rs.getString(3),
 							rs.getString(4),
 							rs.getDouble(5),
-							rs.getString(6)
+							rs.getString(6),
+							rs.getDate(9),
+							rs.getString(7)
 							);
 					list.add(ctm);
 				}
@@ -180,8 +186,8 @@ public class Data_Customer {
 		
 		try {
 			String sql = "UPDATE CUSTOMER SET Customer_Id = ?, Customer_Name = ?, Customer_Sex = ?,"
-				+ " Customer_Address = ?, Customer_Total = ?, Customer_Rank = ?"
-				+ " WHERE Customer_Id = ?;";
+				+ " Customer_Address = ?, Customer_Total = ?, Customer_Rank = ?, Customer_Birth=?, Customer_Email=?"
+				+ " WHERE Customer_Id = ?";
 			
 			Connection conec = ConnectDatabase.getInstance().getConnection();
 			PreparedStatement ps = conec.prepareStatement(sql);
@@ -191,12 +197,14 @@ public class Data_Customer {
 			ps.setString(4, ctm.getCustomer_Address());
 			ps.setDouble(5, ctm.getCustomer_Total());
 			ps.setString(6, ctm.getCustomer_Rank());
+			ps.setDate(7, ctm.getCustomer_Birth());
+			ps.setString(8, ctm.getCustomer_Email());
 			
-			ps.setString(7, ctm.getCustomer_Id());
+			ps.setString(9, ctm.getCustomer_Id());
 				
 			result = ps.executeUpdate();
 			
-			JOptionPane.showMessageDialog(null, "Cập nhật món ăn thành công!");
+			JOptionPane.showMessageDialog(null, "Cập nhật khách hàng thành công!");
 			} catch(SQLException e) {
 				e.printStackTrace();	
 			}
